@@ -1,0 +1,194 @@
+
+1 przesylanie na local ze zdalnego  dana galalz
+np git fetch git@github.com:pablorrr/larablog.git livewire
+
+git fetch <remote_name> <branch_name>
+git branch <branch_name> FETCH_HEAD
+git checkout <branch_name>
+
+
+git clone https://github.com/laravel/laravel.git laravelapp - sklonuje projekt do folderu o nazwie laravelapp 
+
+tutorial
+https://youtu.be/gG80UsfMXsU?list=PLjHmWifVUNMKIGHmaGPVqSD-L6i1Zw-MH
+
+git clean - usuwanie niesledonych katalogow oraz  ich zawaertoaci
+git clean - idf - usuwanie katalogow i plikow  niesledzonych (unsataged)
+
+
+git restore path_file - wykasowanie wszytskich zmian ktore jeszcze nie zostaly zatwierdzone (plik muysi byc sledzony)
+git checkout --path_file - to samo
+
+git rm path_file - usuwanie pliku z kolejki oczekiwania (sledzenia)(uwaga aby ususnac z dysku nalezy dac git commit!!!)
+ uawahga!!!! aby przywrocic  pliki nalezy uzyc tego co ponizej (wczesniej nie moze byc commit):
+
+git reset path_file- odwrotnie niz add ,przenosi ze stage- tryb sledzony do niesledzony (working directory)
+git checkout --path_file - to samo
+
+git log --oneline - skompresoWANA  prezentacja histori gita
+git log --all --decorate --oneline --graph - dokladna [prezentracja  hisrotii repo zdalnie i lokalnie
+
+
+/////////////postepowanie w trybie detached head//////
+git log --oneline
+git checkout id_commita
+tryb head detached head - odzilenie pracy z repo od jakiejkowlek galzezi!!!
+robienie zmian w plikach i zapisnie
+git  commit -am"comment" - zatwierdzenie zmian
+uwaga!!! przy probie zmiany glazi odwomwa!!! - nalzey zapisaac zmianny na nowej galzei!!! w tytm celu:
+git  switch -c nazwa_nowej_galezi - uwtorzeni e nowej glazi na ktrej  zapisane beda zmiany z trybu detached head
+git checkout -b nazwa_nowej_galezi - to ssamo
+////////////////////////////////////////////////////////////////////////////////////
+
+
+git revert id_commit - przywrocenie zmian do poprzednich  sprzed zastosowaniem podanego id commita - utworzy sie z automatu nowy commit z msg(dowyjscia zokienka :q)(hostoria comitow nie zsoytanie zmodyfikaowana)
+
+git stash - umozliwia  np przejscie do nowej gazlezi bez zakomitowania poprzednich zmian (stash dodoaje  zmiany do specjlanego stosu)
+git stash pop - usuwa ostani wskaznik skrtyki
+git stash push -rozniez doajae satsh
+git stash show -pokazuje zawartosc skrytki(nie skomitowane w stosie)
+git stash clear - usuwanie wszytsjkicj staszy
+git stash save coometn_text zachowa stasz z komenntem
+
+
+git rebase nazwa_galezi - podobnie jak mertge laczy galzezie (reabse robi to w sposob bardziej uporzadkowany)
+roznicce  merge vs rebase
+https://womanonrails.com/pl/git-rebase
+
+
+
+
+uwaga!!!! do rozwiazywania konfliktow zawsze uzywaj php storm oraz desktop github
+
+
+
+
+
+
+
+
+
+
+////////////////////praca ze zdlanym repo///
+git remote add origin git@github.com:pablorrr/cli-exerc.git polaczeniee lokala ze zdlanym repo o nazwie cli-exerc
+git push -u origin master - wypchniecei zmian z lokala na zdlane repo u czuli upstream origin master okreslenie na jak glz  ma ja byc wypache zmianay uwaga!!! galezie musza byc takie same po obustronach
+git fetch - pobranie samych informacji(a nie plikow) zmian ze zdlanego do lokalnego repo
+git merge origin/master  -polczenie glezi po przeslaniu fetch zdalna  ze  lokalnna glazia i porselasnie plikow
+
+git pull - pobranie informacji oraz plikow ze zmianami ze zdlanego dolokalnego repo (gdy sciagasz z tej smej galezi co jestes lokalnie niemusiz ustawiac zadnych dodoatkowych parametrrow)
+
+rozniece pull i fetch:
+https://www.freecodecamp.org/news/git-fetch-vs-pull/
+
+
+git push -u origin new-remote-branch-name - wysle nowa galaz z lokala na remote
+git push --set-upstream origin branch_name - podobne dzilanei
+
+///fork////
+fork - sluzy do kopiownia czyjegos repo (podobne do clone)
+kliknij fork w czyims repo - od razu czykes repo skopioje sie na twoje konto, dalej postepowanie zwyczjne git cloen itd
+
+git remote -v - pooze zaleznosci z twoim repo a forkiem(nalzey wejsc w sklonowane repo forka)
+///////////////////////////////
+
+////////////////////tagowanie(wersjonowanie)////////////
+
+git tag ver2.0 - utworzy tag o nawzwie ver2.0 na ostatanio dodoanym commicie
+git tag ver2.0 commit_id -otaguje dany commit
+git tag - pokaze wzsytskie tagi
+git show ver2.0 -pokaze tag z podana nazwa
+git tag ver2.0 -a -m"cpomment content" - utworzy tag o pdanej nazwiw przypisze autora tagu opraz  zpaisze go z komentarzem
+git push --tags - wypychanie  tagow z loklanego do zdlanegfo repo
+git tag -d <tag_name> - usuwanie tagu
+w zdlanym repo github mozna tworzyc wydanie relases na pdstawie tagu :https://youtu.be/1g6QTpOGDzU?list=PLjHmWifVUNMKIGHmaGPVqSD-L6i1Zw-MH&t=181
+
+git push origin -d v1.0 - usuwanie tagu ze zdlanego repo
+
+///////////////////////////////////////////////////////////////
+
+
+//////////////////usuwanie kommitow na stale
+do przywracania zmian bez zmiany hoistroii  gita oraz nie usuwania commitow sluzy - revert
+
+
+uwaga!!! usuwa kommity bez mozliwosci przywrocenia ich!!! usuwanie commita liczy sie od pierwszego podanego do ostanaiego podanego
+
+$ git reset --hard HEAD       (going back to HEAD)
+
+$ git reset --hard HEAD^      (going back to the commit before HEAD)
+$ git reset --hard HEAD~1     (equivalent to "^")
+
+$ git reset --hard HEAD~2     (going back two commits before HEAD)
+git reset --hard commit_id - usunie WSZYTSKIE COMMITY!!! az do podanego w commit_id
+
+git frelog - pokazuje hsrorie przesuwajacego sie wskaznika head
+
+git reset --soft - analogicznie jak powyzej usnie dane commity ale jest mozliwosc przywrocenia starych commitow revertem - uawaga!!! nazlezy przed resetem wykonac git log  aby miec dostep do strych id commitow
+
+////////cherry pick/////////////////////////////////////
+
+https://www.tremplin-numerique.org/pl/a-quoi-sert-git-cherry-pick-et-quand-devriez-vous-lutiliser
+git cherry-pick id-commit - skopiowanie jedngo commita alub wioecej na inna galaz
+uzycie:
+git log
+skpiowanie  id danego commita
+przelaczeie na galazna jaka commit ma byc skpoiowany
+git cherry-pick id-commit
+uwaga!!! mozliwe konflikty
+
+//////////////////////////////////////////////////////////////
+
+
+
+
+///pulll request////
+wyjasnienie
+https://www.pagerduty.com/resources/learn/what-is-a-pull-request/
+https://javaleader.pl/2019/10/28/jak-zrobic-pull-request-na-github/
+
+Pull Request to metoda scalania gałęzi w gicie.
+
+1 -sposb gdy jestes wlascicielem repo tworzysz lokalnie nowa glaz tworzysz zmiany i pusghujesz glaz n zdlanym zlkala - git zaproponuje pull request czyli polczenie  swiezowypushowanej galzi z glowna gllezia zdlana - klikasz campare and pull request aby polczyc nowa glaz z master - nastepnie postepuj zgodnie z instr. az dpstaniesz  komiunikat Pull request successfully merged and closed
+
+2. sposb forkowanie (rozwidlenie) - wchodzis zna czyjes repo zdlane  klikasz fork - kopiujesz zdlaneg repo do swiojej kolekcji repo
+klonujesz zdlane repo lokalnie
+tworzysz nowa glaz- wprowadzasz zmiany
+pushujesz nowa glazze zmianami w 
+wlascicel  forkeowanego repo nprwd dostaje powidmieni o propozycji scalniea lokalnbej glzi se swoja glowna njprwd ma mozliwosc podejrzeniazmian z lokalnej wysylanej galezi
+
+
+
+
+
+
+////////////////generowaniessh i bsluga///
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+
+uwaga!!!  w razie problemow przy utworzeiu jklucza po stronie github znajdz i wyedytuj plik id_ed25519.pub  i wklej do okinka w github
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
